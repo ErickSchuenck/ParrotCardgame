@@ -3,12 +3,12 @@
     padding: 0;
 }
 
-.card img{
+img{
     width: 100px;
     height: 100px;
 }
 
-.whole{
+main{
     background-color: #EEF9BF;
     height: 100vh;
     width: 100%;
@@ -18,77 +18,44 @@
     font-family:Arial, Helvetica, sans-serif;
     color: #75B79E;
 }
-.whole h1 {
+main h1 {
     margin-top: 10%;
 }
-.card{
-    width: 117px;
-    height: 146px;
-    border-radius: 5px;
-    background-color: white;
-    margin: 40px;
-    position: relative;
-    border: none;
-    cursor: pointer;
-}
-.card_front{
-    
-    width: 117px;
-    height: 146px;
-    border-radius: 5px;
-    background-color: #A7E9AF;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.card_back{
-    width: 117px;
-    height: 146px;
-    border-radius: 5px;
-    background-color: #75B79E;
-    position: absolute;
-    top: 0px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.table{
-    display: flex;
+.cardspace{
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .driven-card {
-    width: 200px;
-    height: 250px;
-    position: relative;
-  }
+  display: flex;
+  margin: 34px;
+  width: 117px;
+  height: 146px;
+  border-radius: 5px;
+}
 
-  .face {
-    width: 100%;
-    height: 100%;
-    background-color: #A7E9AF;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    backface-visibility: hidden;
-    transition: all 1s;
-    transform-style: preserve-3d;
-  }
-
-  .back-face {
-    transform: rotateY(180deg);
-  }
-
-  .driven-card:active .back-face {
-    transform: rotateY(0deg);
-  }
-
-  .driven-card:active .front-face {
-    transform: rotateY(-180deg);
-  }
+.flipper{
+  position: relative;
+  transition: transform 1000ms;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  transform-style: preserve-3d;
+}
+.driven-card:hover .flipper{
+  transform: rotateY(180deg);
+}
+.front-face, .back-face{
+  
+  background-color: #A7E9AF;
+  position: absolute;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-face{
+  transform: rotateY(180deg);
+}
