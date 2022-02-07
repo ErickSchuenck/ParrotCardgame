@@ -37,11 +37,13 @@ function flip(element){
     if (flipped_a_card === false){
     first_card = element;
     play_counter++;
+    document.querySelector(".moves_made").innerHTML = play_counter;
     flipped_a_card = true;
     } else {
         flipped_a_card = false;
         second_card = element;
         play_counter++;
+        document.querySelector(".moves_made").innerHTML = play_counter;
         check_for_match();
     } console.log(flipped_a_card);
 }
@@ -52,7 +54,7 @@ function check_for_match(){
         first_card.onclick = null;
         second_card.onclick = null;
         victory_counter = victory_counter + 1;
-        if (victory_counter == even_number){
+        if (victory_counter * 2== even_number){
             setTimeout(victory, 1000);
         }
         return;
