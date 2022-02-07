@@ -1,6 +1,10 @@
-const main = document.querySelector('.cardspace');
+let flipped_a_card = false;
+let first_card;
+let second_card;
+let board_locker = false;
 let even_number = 0;
 let j = 0;
+const main = document.querySelector('.cardspace');
 const img1 = `<img src="bobrossparrot.gif"/>`;
 const img2 = `<img src="explodyparrot.gif"/>`;
 const img3 = `<img src="fiestaparrot.gif"/>`;
@@ -22,13 +26,39 @@ function gamesize(){
 
 gamesize();
 
-function flip(e){
-    if(document.querySelector('.card_front').style.display == 'none'){
-        document.querySelector('.card_front').style.display = '';
+function flip(element){
+    if (board_locker === true) {return;} 
+    else if (element === first_card) {return;} 
+    else {element.classList.add('flip');}
+
+    if (flipped_a_card === false){
+    first_card = element;
+    flipped_a_card = true;
     } else {
-        document.querySelector('.card_front').style.display = 'none';
+        flipped_a_card = false;
+        second_card = element;
+        check_for_match();
+    } console.log(flipped_a_card);
+}
+
+function check_for_match(){
+    if (first_card.querySelector('.back_face').innerHTML === second_card.querySelector('.back_face').innerHTML){
+        console.log("MATCH!!!!!!!");
+        return;
+    } else {
+        board_locker = true;
+        console.log("Try again!");
+        setTimeout(close_cards, 1000);
+        board_locker = false;
+        return;
     }
-} 
+}
+
+function close_cards(){
+    first_card.classList.remove('flip');
+    second_card.classList.remove('flip');
+}
+
 function display_cards(){
     main.innerHTML = ``;
     for (let i = 0; i < even_number; i++){
@@ -39,17 +69,18 @@ function display_cards(){
     for (j = 0; j < even_number * 2; j++){
         
         let card = `
-        <div class="driven-card">
-        <div class="flipper">
-        <div class="front-face">
-        <img src="front.png">
-        </div>
+        <div class="driven_card" onclick = 'flip(this)' disabled = false>
+            
+                <div class="front_face">
+                    <img src="front.png">
+                </div>
 
-        <div class="back-face">
-        ${img_array_final[j]}
+                <div class="back_face">
+                    ${img_array_final[j]}
+                </div>
+
         </div>
-        </div>
-        </div>`
+        `
     main.innerHTML = main.innerHTML + card;
     }
 }

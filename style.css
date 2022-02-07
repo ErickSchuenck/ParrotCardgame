@@ -33,26 +33,21 @@ main h1 {
   flex-wrap: wrap;
 }
 
-.driven-card {
+.driven_card {
   display: flex;
   margin: 34px;
   width: 117px;
   height: 146px;
   border-radius: 5px;
-}
-
-.flipper{
   position: relative;
-  transition: transform 1000ms;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
   transform-style: preserve-3d;
+  transition: transform 1s;
+  cursor: pointer;
 }
-.driven-card:hover .flipper{
+.flip{
   transform: rotateY(180deg);
 }
-.front-face, .back-face{
+.front_face, .back_face{
   
   background-color: #A7E9AF;
   position: absolute;
@@ -63,6 +58,7 @@ main h1 {
   align-items: center;
   justify-content: center;
 }
-.back-face{
+.back_face{
+  position: absolute;
   transform: rotateY(180deg);
 }
