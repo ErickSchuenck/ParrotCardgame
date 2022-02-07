@@ -4,6 +4,7 @@ let second_card;
 let board_locker = false;
 let even_number = 0;
 let victory_counter = 0;
+let play_counter = 0;
 let j = 0;
 const main = document.querySelector('.cardspace');
 const img1 = `<img src="bobrossparrot.gif"/>`;
@@ -18,11 +19,12 @@ let img_array_final = [];
 img_array = img_array.sort(() => Math.random() -0.5);
 
 function gamesize(){
-    even_number = parseInt(prompt("Com quantos pares você quer jogar? (De 1 a 7)"));
-        while (even_number>7){
-        even_number = parseInt(prompt("Com quantos pares você quer jogar? (De 1 a 7)"))
+    even_number = parseInt(prompt("Com quantas cartas você quer jogar? (De 4 a 14)"));
+        while (even_number>14 || even_number<4 || even_number % 2 !==0){
+        even_number = parseInt(prompt("Com quantas cartas você quer jogar? (De 4 a 14)"))
         }
-    display_cards()
+    display_cards();
+    play_counter = 0;
 }
 
 gamesize();
@@ -34,10 +36,12 @@ function flip(element){
 
     if (flipped_a_card === false){
     first_card = element;
+    play_counter++;
     flipped_a_card = true;
     } else {
         flipped_a_card = false;
         second_card = element;
+        play_counter++;
         check_for_match();
     } console.log(flipped_a_card);
 }
@@ -47,6 +51,10 @@ function check_for_match(){
         console.log("MATCH!!!!!!!");
         first_card.onclick = null;
         second_card.onclick = null;
+        victory_counter = victory_counter + 1;
+        if (victory_counter == even_number){
+            setTimeout(victory, 1000);
+        }
         return;
     } else {
         board_locker = true;
@@ -55,6 +63,10 @@ function check_for_match(){
         setTimeout(board_locker_off, 1000);
         return;
     }
+}
+
+function victory(){
+    alert(`PARABÉNS!!! Você ganhou em ` + play_counter + ` jogadas`)
 }
 
 function board_locker_off(){
@@ -68,12 +80,12 @@ function close_cards(){
 
 function display_cards(){
     main.innerHTML = ``;
-    for (let i = 0; i < even_number; i++){
+    for (let i = 0; i < even_number/2; i++){
         img_array_final.push(img_array[i]);
         img_array_final.push(img_array[i]);
     }
     img_array_final = img_array_final.sort(() => Math.random() -0.5);
-    for (j = 0; j < even_number * 2; j++){
+    for (j = 0; j < even_number; j++){
         
         let card = `
         <div class="driven_card" onclick = 'flip(this)' disabled = false>
