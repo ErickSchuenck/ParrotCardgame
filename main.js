@@ -6,14 +6,16 @@ let even_number = 0;
 let victory_counter = 0;
 let play_counter = 0;
 let j = 0;
+let tick = document.querySelector(".ticker");
+let my_interval;
 const main = document.querySelector('.cardspace');
-const img1 = `<img src="bobrossparrot.gif"/>`;
-const img2 = `<img src="explodyparrot.gif"/>`;
-const img3 = `<img src="fiestaparrot.gif"/>`;
-const img4 = `<img src="metalparrot.gif"/>`;
-const img5 = `<img src="revertitparrot.gif"/>`;
-const img6 = `<img src="tripletsparrot.gif"/>`;
-const img7 = `<img src="unicornparrot.gif"/>`;
+const img1 = `<img src="bobrossparrot.gif" alt = 'papagaio cabeludo'/>`;
+const img2 = `<img src="explodyparrot.gif" alt = 'papagaio explodindo'/>`;
+const img3 = `<img src="fiestaparrot.gif" alt = 'papagaio festeiro'/>`;
+const img4 = `<img src="metalparrot.gif" alt = 'papagaio iron maiden'/>`;
+const img5 = `<img src="revertitparrot.gif" alt = 'papagaio sobrero'/>`;
+const img6 = `<img src="tripletsparrot.gif" alt = 'três papagaio'/>`;
+const img7 = `<img src="unicornparrot.gif" alt = 'papagaio com chifre magico'/>`;
 let img_array = [img1, img2, img3, img4, img5, img6, img7];
 let img_array_final = [];
 img_array = img_array.sort(() => Math.random() -0.5);
@@ -68,7 +70,7 @@ function check_for_match(){
 }
 
 function victory(){
-    alert(`PARABÉNS!!! Você ganhou em ` + play_counter + ` jogadas`)
+    alert(`PARABÉNS!!! Você ganhou em ${play_counter} jogadas e ${tick.innerHTML} segundos` )
 }
 
 function board_locker_off(){
@@ -90,13 +92,13 @@ function display_cards(){
     for (j = 0; j < even_number; j++){
         
         let card = `
-        <div class="driven_card" onclick = 'flip(this)' disabled = false>
+        <div class="driven_card" onclick = 'flip(this)' data-identifier = 'card'>
             
-                <div class="front_face">
+                <div class="front_face" data-identifier = 'front-face'>
                     <img src="front.png">
                 </div>
 
-                <div class="back_face">
+                <div class="back_face" data-identifier = 'back-face'>
                     ${img_array_final[j]}
                 </div>
 
@@ -104,4 +106,10 @@ function display_cards(){
         `
     main.innerHTML = main.innerHTML + card;
     }
+}
+tick.innerHTML = 0;
+clearInterval(my_interval);
+my_interval = setInterval(gametimer, 1000);
+function gametimer(){
+    tick.innerHTML = parseInt(tick.innerHTML) +1;
 }

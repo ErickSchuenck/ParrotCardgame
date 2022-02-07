@@ -63,3 +63,10 @@ main h1 {
   position: absolute;
   transform: rotateY(180deg);
 }
+.status{
+  display: flex;
+  flex-direction: column;
+}
+p{
+  margin: 10px;
+}
