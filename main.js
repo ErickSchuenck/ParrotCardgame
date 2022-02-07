@@ -3,6 +3,7 @@ let first_card;
 let second_card;
 let board_locker = false;
 let even_number = 0;
+let victory_counter = 0;
 let j = 0;
 const main = document.querySelector('.cardspace');
 const img1 = `<img src="bobrossparrot.gif"/>`;
@@ -27,8 +28,8 @@ function gamesize(){
 gamesize();
 
 function flip(element){
-    if (board_locker === true) {return;} 
-    else if (element === first_card) {return;} 
+    if (board_locker === true) return; 
+    else if (element === first_card) return; 
     else {element.classList.add('flip');}
 
     if (flipped_a_card === false){
@@ -44,14 +45,20 @@ function flip(element){
 function check_for_match(){
     if (first_card.querySelector('.back_face').innerHTML === second_card.querySelector('.back_face').innerHTML){
         console.log("MATCH!!!!!!!");
+        first_card.onclick = null;
+        second_card.onclick = null;
         return;
     } else {
         board_locker = true;
         console.log("Try again!");
         setTimeout(close_cards, 1000);
-        board_locker = false;
+        setTimeout(board_locker_off, 1000);
         return;
     }
+}
+
+function board_locker_off(){
+    board_locker = false;
 }
 
 function close_cards(){
